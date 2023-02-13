@@ -10,10 +10,10 @@ class ProductManager{
     }
     getProducts(){
         // Creo que se tiene que usar map para poder generar el array que me van a pedir al principio 
-        console.log(); 
+        let products = [this.id, this.title, this.description, this.price, this.thumbnail, this.code, this.stock]
+        console.log(products); 
     }
     addProduct(title,description,price,thumbnail,code,stock){
-        let id = 0
         if (id <= 1) {
             id++
         } else {
@@ -32,4 +32,6 @@ class ProductManager{
 // ProductManager.addProduct('producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25)
 
 const productManager = new ProductManager();
-console.log(productManager);
+// console.log(productManager);
+
+productManager.getProducts();
