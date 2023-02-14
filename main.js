@@ -25,7 +25,8 @@ class ProductManager{
         console.log(products); 
     }
     addProduct(title,description,price,thumbnail,code,stock){
-        products.push(id,title,description,price,thumbnail,code,stock)
+        products.push(id,title,description,price,thumbnail,code,stock);
+        console.log(products.code);
         autoincrement();
         sku.push(code);
     }
@@ -49,12 +50,15 @@ productManager.getProducts();
 
 
 // Pendiente
+
 productManager.addProduct('producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25);
 // productManager.getProducts();
 
-// for (const product of products){
+// for( const product of products){
 //     console.log(product.code)
 // }
+
+console.log(products.code)
 console.log(products[5]);
 if (products[5] === 'abc123'){
     console.log('funciona')
