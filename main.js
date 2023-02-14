@@ -1,34 +1,41 @@
-// Autoincremental
-let id = 1;
-
-// Funcion que genera un autoincremental
-function autoincrement() {
-    id++;
-    return id;
-};
-
-// Arrays
-const products = [];
-const sku = [];
-
 // Clase
 class ProductManager{
-    constructor(title,description,price,thumbnail,code,stock){
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.thumbnail = thumbnail;
-        this.code = code;
-        this.stock = stock;
+    constructor(){
+        this.products = [];
+        this.skus = []
     }
     getProducts(){
-        console.log(products); 
+        // console.log(products);
+        return console.log(this.products)
     }
+    
     addProduct(title,description,price,thumbnail,code,stock){
-        products.push(id,title,description,price,thumbnail,code,stock);
-        console.log(products.code);
-        autoincrement();
-        sku.push(code);
+
+        const id =
+            this.products.length === 0
+            ? 1
+            : this.products[this.products.length -1].id +1
+
+        const sku = {
+            id,
+            code
+        }
+        this.skus.push(sku)
+        // console.log('skuCode');
+        console.log(this.skus);
+        // console.log(this.skus.code)
+        // Me quede aqui, falta determinar como encontrar ese valor
+
+        const product = {
+            id,
+            title,
+            description,
+            price,
+            thumbnail,
+            code,
+            stock
+        }
+        this.products.push(product)
     }
     // getProductById(id){
     //     console.log(products[id]); 
@@ -52,24 +59,22 @@ productManager.getProducts();
 // Pendiente
 
 productManager.addProduct('producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25);
-// productManager.getProducts();
+productManager.getProducts();
 
-// for( const product of products){
-//     console.log(product.code)
+
+// console.log(products.code)
+// console.log(products[5]);
+// if (products[5] === 'abc123'){
+//     console.log('funciona')
+// }else{
+//     console.log('no funciona');
 // }
 
-console.log(products.code)
-console.log(products[5]);
-if (products[5] === 'abc123'){
-    console.log('funciona')
-}else{
-    console.log('no funciona');
-}
+// let evaluacion = products[5,5];
+// console.log(evaluacion)
 
-let evaluacion = products[5,5];
-console.log(evaluacion)
+// let skuCode = sku;
+// console.log(skuCode);
 
-let skuCode = sku;
-console.log(skuCode);
-
-console.log(stock);
+// console.log(stock);
+// console.log(products);
