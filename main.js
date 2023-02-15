@@ -2,7 +2,7 @@
 class ProductManager{
     constructor(){
         this.products = [];
-        this.skus = []
+        this.skus = [];
     }
     getProducts(){
         // console.log(products);
@@ -35,7 +35,10 @@ class ProductManager{
         this.products.push(product)
     }
     getProductById(id){
-        return console.log(this.products.id === id)
+        const skus_code = this.sku.code
+        console.log(skus_code);
+        // const eval = this.products.find((prod) => prod.code != )
+        // return console.log(this.products.id === id)
         // return console.log(this.products[this.products.find((producto) => producto === id)])
     }
 }
