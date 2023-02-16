@@ -81,4 +81,38 @@ class ProductManager{
     }
 }
 
-// Testing Area
+// Se instancia
+const productManager = new ProductManager();
+
+// Se llama a get products para array vacio
+productManager.getProducts();
+
+// Se agrega producto con su autoincremental ya declarado en el metodo
+productManager.addProduct(
+    'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
+    );
+
+// Se llama a get products
+productManager.getProducts();
+
+// Se agrega producto con su autoincremental ya declarado en el metodo
+productManager.addProduct(
+    'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
+    );
+
+// Se llama a get products
+productManager.getProducts();
+
+// Pendiente
+
+productManager.addProduct('producto prueba 2','Este es un producto prueba 2',201,'Sin imagen','abc1234',251);
+productManager.getProducts();
+
+productManager.addProduct('producto prueba 3','Este es un producto prueba 2',202,'Sin imagen','abc12345',252);
+productManager.getProducts();
+
+// productManager.getProductById(1);
+// productManager.getProductById(2);
+// productManager.getProductById(2);
+// productManager.getProductById(1);
+// productManager.getProductById(3);
