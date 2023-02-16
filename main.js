@@ -17,38 +17,11 @@ class ProductManager{
             ? 1
             : this.products[this.products.length -1].id +1
 
-    // Prototipo de evaluacion
-        this.skus[0] === undefined
-        ? console.log('array is empty')
-        : console.log('array has something');
-
-        // let skus_code = 
-        // // Puedo poner que si es un array vacio entonces que pase algo 
-        // this.skus[id - 1].code === undefined
-        // // ? skus_code = false
-        // ? console.log('This is true')
-        // // : console.log(this.skus.some((sku) => sku.code === skus_code));
-        // : console.log('This is false')
-
-        // console.log(skus_code);
-
-    // array de skus
+    // array de sku
         const sku = {
             id,
             code
         }
-
-    // Push al array
-        this.skus.push(sku)
-    
-    // // Evaluacion de duplicidad
-    //     const skus_code = this.skus[id - 1].code
-    //     console.log(this.skus.some((sku) => sku.code === skus_code))
-    //     console.log(skus_code);
-
-    //     const duplicado = this.skus.find((sku) => sku.code === code)
-    //     console.log("duplicado")
-    //     console.log(duplicado + 'error')
 
     // Array de product
         const product = {
@@ -60,16 +33,102 @@ class ProductManager{
             code,
             stock
         }
-        this.products.push(product)
+    // Prototipo de evaluacion
+    if (this.skus[0] === undefined){
+        // console.log(this.skus);
+        // console.log(this.products);
+        console.log('array is empty')
+
+
+        // Push a skus
+            this.skus.push(sku)
+        // Push a products
+            this.products.push(product)
+
+        // console.log(this.skus);
+        // console.log(this.products);
+        console.log('array is now added')
+        
+    }else {
+        console.log('array has something')
+
+        // console.log(this.skus.every((sku, index)=>{
+        //     console.log(index)
+        //     return console.log(sku);
+        // }));
+
+        console.log('Para borrar pero evaluar');
+                // Push a skus
+                this.skus.push(sku)
+                // Push a products
+                    this.products.push(product)
+        console.log('evaluacion fin');
+
+        let newCode = code;
+        console.log(newCode);
+        let evaluador = this.skus
+        console.log(this.skus);
+        console.log(evaluador);
+        console.log(this.skus[0]);
+        console.log(evaluador[0]);
+        console.log(this.skus[1]);
+
+        console.log('Evaluacion de entrar al array code');
+        console.log(this.skus[1].code);
+
+        console.log('Evaluacion alternativa');
+        // Otra forma de imprimirlos
+        for (let i = 0; i < evaluador.length; i++){
+            console.log (evaluador[i])
+        }
+        for (let i = 0; i < evaluador.length; i++){
+            console.log (evaluador[i].code)
+        }
+        for (let i = 0; i < evaluador.length -1; i++){
+
+            console.log ('Prueba de evaluacion' + [i])
+            if(newCode != evaluador[i].code){
+                console.log(newCode + ' codigo nuevo');
+                console.log(evaluador[i].code);
+                console.log('no hay repeticion')
+            }else{
+                console.log(newCode + ' codigo nuevo');
+                console.log(evaluador[i].code);
+                console.log('hay repeticion');
+                console.log('Repeated code, please verify info');
+            }
+
+        }
+        // Si cualquier codigo que existe en la variable temporal
+        // coincide con esta iteración, devuelve un true
+
+        console.log('Evaluacion finalizada');
+
+        // console.log(this.skus.every((index)=>{
+        //     // console.log(index)
+        //     return index;
+        // }));
+        // console.log(this.skus[sku.code]); 
+    }
+    
+    // // Evaluacion de duplicidad
+    //     const skus_code = this.skus[id - 1].code
+    //     console.log(this.skus.some((sku) => sku.code === skus_code))
+    //     console.log(skus_code);
+
+    //     const duplicado = this.skus.find((sku) => sku.code === code)
+    //     console.log("duplicado")
+    //     console.log(duplicado + 'error')
+
+
+
     }
 
     getProductById(id){
-        const identifier = this.products[id - 1]
-        console.log(identifier);
+        return (console.log(this.products[id - 1]))
+        // const identifier = this.products[id - 1]
+        // console.log(identifier);
 
-        // this.products.find((prod) => prod.code != )
-        // return console.log(this.products.id === id)
-        // return console.log(this.products[this.products.find((producto) => producto === id)])
     }
 }
 
@@ -92,6 +151,9 @@ productManager.getProducts();
 // Pendiente
 
 productManager.addProduct('producto prueba 2','Este es un producto prueba 2',201,'Sin imagen','abc1234',251);
+productManager.getProducts();
+
+productManager.addProduct('producto prueba 3','Este es un producto prueba 2',202,'Sin imagen','abc12345',252);
 productManager.getProducts();
 
 // productManager.getProductById(1);
