@@ -91,7 +91,8 @@ class ProductManager{
         let updateProduct = this.products[id - 1]
         // let propertyName = property.toString();
         // console.log(propertyName);
-        console.log(`property to update is ${property}`);
+        console.log(`property to change is ${property}`);
+        console.log(`Value to update is ${newValue}`);
         // console.log(updateProduct.property);
         console.log(updateProduct.code);
     }
@@ -176,6 +177,6 @@ productManager.getProductById(1);
 
 productManager.getProductById(3);
 
-productManager.updateProduct(3, 'code');
+productManager.updateProduct(3, 'code', '123abfd');
 // productManager.deleteProduct(2);
 // productManager.deleteProduct(3);
