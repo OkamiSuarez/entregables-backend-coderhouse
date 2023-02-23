@@ -75,13 +75,38 @@ class ProductManager{
         }
     }
 
-    //mtodo para obtener el id 
+    //metodo para obtener el id 
     getProductById(id){
         if(this.products[id - 1] === undefined){
-            return console.log(`There's still not a product created with id ${id} !!!`);
+            return console.log(`There's still not a product created with id ${id} or it has been deleted`);
         }else{
             console.log(`Showing products from id ${id}`);
             return (console.log(this.products[id - 1]))
+        }
+    }
+
+    // // NUEVO
+    // Actualizacion de producto
+    updateProduct(id,property,newValue){
+        let updateProduct = this.products[id - 1]
+        // let propertyName = property.toString();
+        // console.log(propertyName);
+        console.log(`property to update is ${property}`);
+        // console.log(updateProduct.property);
+        console.log(updateProduct.code);
+    }
+
+    // Eliminacion de producto 
+    deleteProduct(id){
+        let arrayPosition = id - 1;
+        // console.log('la posicion en el array es ' + arrayPosition);
+        if(this.products[arrayPosition] === undefined){
+            return console.log(`There's still not a product created with id ${id} !!!`);
+        }else{
+            console.log('Deleting...');
+            this.products[arrayPosition] = undefined
+            this.skus[arrayPosition] = undefined
+            return console.log(`Product with id ${id} has been succesfully deleted`);
         }
     }
 }
@@ -90,35 +115,35 @@ class ProductManager{
 //  Para fines prácticos quitar una línea de 
 // comentario a partir de línea 93
 
-// // Se instancia
-// const productManager = new ProductManager();
+// Se instancia
+const productManager = new ProductManager();
 
 // // Se llama a get products para array vacio
 // productManager.getProducts();
 
-// // Se agrega producto con su autoincremental ya declarado en el metodo
-// productManager.addProduct(
-//     'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
-//     );
+// Se agrega producto con su autoincremental ya declarado en el metodo
+productManager.addProduct(
+    'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
+    );
 
 // // Se llama a get products
 // productManager.getProducts();
 
-// // Se agrega producto repetido
-// productManager.addProduct(
-//     'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
-//     );
+// Se agrega producto repetido
+productManager.addProduct(
+    'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
+    );
 
 // // Se llama a get products
 // productManager.getProducts();
 
-// // Se agrega producto nuevo
+// Se agrega producto nuevo
 
-// productManager.addProduct('producto prueba 2','Este es un producto prueba 2',201,'Sin imagen','abc1234',251);
+productManager.addProduct('producto prueba 2','Este es un producto prueba 2',201,'Sin imagen','abc1234',251);
 // productManager.getProducts();
 
-// // Se agrega producto nuevo
-// productManager.addProduct('producto prueba 3','Este es un producto prueba 2',202,'Sin imagen','abc12345',252);
+// Se agrega producto nuevo
+productManager.addProduct('producto prueba 3','Este es un producto prueba 2',202,'Sin imagen','abc12345',252);
 // productManager.getProducts();
 
 // // Se prueba el getProduct
@@ -129,3 +154,28 @@ class ProductManager{
 // productManager.getProductById(0);
 // productManager.getProductById(3);
 // productManager.getProductById(-1);
+
+// Siguiente entrega
+
+// --se debe devolver el get product como un OJBETO 
+// --Por lo tanto ojo en el json string y json parse 
+
+
+// -- Lo primero que voy a hacer es crear el codigo normal
+// -- a partir de ese punto empiezo a trabajar con los fs
+
+productManager.getProductById(1);
+productManager.deleteProduct(1);
+productManager.getProductById(1);
+productManager.getProductById(2);
+
+productManager.addProduct(
+    'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
+    );
+productManager.getProductById(1);
+
+productManager.getProductById(3);
+
+productManager.updateProduct(3, 'code');
+// productManager.deleteProduct(2);
+// productManager.deleteProduct(3);
