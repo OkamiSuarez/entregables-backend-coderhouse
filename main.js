@@ -1,6 +1,12 @@
+// Filesystem
+const fs = require('fs')
+
+const path = 'Products.json'
+
 // Clase
 class ProductManager{
-    constructor(){
+    constructor(path){
+        this.path = path
         this.products = [];
         this.skus = [];
     }
@@ -87,14 +93,25 @@ class ProductManager{
 
     // // NUEVO
     // Actualizacion de producto
-    updateProduct(id,property,newValue){
-        let updateProduct = this.products[id - 1]
-        // let propertyName = property.toString();
-        // console.log(propertyName);
-        console.log(`property to change is ${property}`);
-        console.log(`Value to update is ${newValue}`);
-        // console.log(updateProduct.property);
-        console.log(updateProduct.code);
+    updateProduct(id,obj){
+        const products = this.requestProducts()
+        const indexProducts = products.findIndex((u) => u.id === id)
+        if (indexProducts === -1) {
+            return 'Product not found'
+        }
+        const productUpdate = {...products[indexProducts], ...obj}
+        products.splice(indexProducts, 1, productUpdate)
+        fs.promises.writeFile(this.path, JSON.stringify(products))
+
+        // Personal
+
+        // let updateProduct = this.products[id - 1]
+        // // let objName = property.toString();
+        // // console.log(propertyName);
+        // console.log(`property to change is ${obj}`);
+        // console.log(`Value to update is ${newValue}`);
+        // // console.log(updateProduct.property);
+        // console.log(updateProduct.code);
     }
 
     // Eliminacion de producto 
@@ -108,6 +125,17 @@ class ProductManager{
             this.products[arrayPosition] = undefined
             this.skus[arrayPosition] = undefined
             return console.log(`Product with id ${id} has been succesfully deleted`);
+        }
+    }
+
+    // Consultar productos
+    requestProducts = async () => {
+        if (fs.existsSync(this.path)){
+            const infoProducts = await fs.promises.readFile(this.path, 'utf-8')
+            const fileProducts = JSON.parse(infoProducts)
+            return fileProducts
+        } else {
+            console.log('File does not exists');
         }
     }
 }
@@ -177,6 +205,11 @@ productManager.getProductById(1);
 
 productManager.getProductById(3);
 
-productManager.updateProduct(3, 'code', '123abfd');
-// productManager.deleteProduct(2);
+
+productManager.deleteProduct(2);
+productManager.getProductById(2);
+
+// productManager.updateProduct(3, );
 // productManager.deleteProduct(3);
+productManager.requestProducts();
+updateProduct(3,{price: 505})
