@@ -1,88 +1,60 @@
 // Clase
 class ProductManager{
+    #products
     constructor(){
-        this.products = [];
-        this.skus = [];
+        this.#products = [];
     }
+
+    // Metodo get products
     getProducts(){
-        return console.log(this.products)
+        // Si no retorno el console log al llamar la funcion
+        // No aparece nada, entonces por que no mejor declararlo asi
+        let consoleProduct = console.log(this.#products)
+        return consoleProduct; 
+    }
+
+    // Autoincremental
+    #setProductId(){
+        return this.#products.length === 0
+        ? 1
+        : this.#products[this.#products.length -1].id +1
     }
     
-    addProduct(title,description,price,thumbnail,code,stock){
-
-    // Auoincremental
-        const id =
-            this.products.length === 0
-            ? 1
-            : this.products[this.products.length -1].id +1
-
-    // array de sku
-        const sku = {
-            id,
-            code
+    // Getter del product code
+    #setProductCode(code){
+        // Donde usamos el get product que guardamos en const?
+        // Creo que aquí se genera un error por que esta escrito
+        // Como product y no como products
+        const getProduct = this.#products.find((product) => product.code === code);
+        // ¿Que es throw?
+        // Como funciona el new error?
+        // ¿Por que usamos product en el if si declaramos getProduct?
+        if (getProduct){
+            throw new Error('assigned code');
         }
-
-    // Array de product
-        const product = {
-            id,
-            title,
-            description,
-            price,
-            thumbnail,
-            code,
-            stock
-        }
-
-    // Evaluacion de codigos
-    if (this.skus[0] === undefined){
-        // Push a skus
-            this.skus.push(sku)
-        // Push a products
-            this.products.push(product)
-        console.log('Products added');
-        }else {
-        // array has something
-        // Para evaluar dejo que entre al array
-        // Push a skus
-            this.skus.push(sku)
-        // Push a products
-            this.products.push(product)
-        
-        // Declaramos variables para
-        // Evaluar la repeticion de codigo
-        let newCode = code;
-        let evaluador = this.skus
-
-        // Iteramos para evaluar
-        for (let i = 0; i < evaluador.length -1; i++){
-            // console.log ('Prueba de evaluacion' + [i])
-            if(newCode != evaluador[i].code){
-                // console.log(newCode + ' codigo nuevo');
-                // console.log(evaluador[i].code + ' Codigo ya en el array');
-                // console.log(`${evaluador.length} Products in stock`);
-                return console.log('Products added');
-            }else{
-                // console.log(newCode + ' codigo nuevo');
-                // console.log(evaluador[i].code + ' codigo ya existente');
-                // console.log('hay repeticion');
-                // // se hace el pop a los arrays
-                this.skus.pop(sku)
-                // // pop a products
-                this.products.pop(product)
-                return console.log('Repeated code, please verify info');
-                }
-            }
-        }
+        return code;
     }
 
-    //mtodo para obtener el id 
+    // Metodo add product
+    addProduct(title,description,price,thumbnail,code,stock){
+
+    // Array de product
+    this.#products.push({
+        id: this.#setProductId(),
+        title,
+        description,
+        price,
+        thumbnail,
+        code: this.#setProductCode(code),
+        stock
+    })
+    }
+
+    //metodo para obtener el id 
     getProductById(id){
-        if(this.products[id - 1] === undefined){
-            return console.log(`There's still not a product created with id ${id} !!!`);
-        }else{
-            console.log(`Showing products from id ${id}`);
-            return (console.log(this.products[id - 1]))
-        }
+        // Misma situacion aqui para poder devolver algo a la consola
+        let gotProducts = console.log(this.#products.find((product) => product.id === id));
+        return gotProducts;
     }
 }
 
@@ -91,15 +63,15 @@ class ProductManager{
 // comentario a partir de línea 93
 
 // // Se instancia
-// const productManager = new ProductManager();
+const productManager = new ProductManager();
 
 // // Se llama a get products para array vacio
-// productManager.getProducts();
+productManager.getProducts();
 
 // // Se agrega producto con su autoincremental ya declarado en el metodo
-// productManager.addProduct(
-//     'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
-//     );
+productManager.addProduct(
+    'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
+    );
 
 // // Se llama a get products
 // productManager.getProducts();
@@ -109,23 +81,23 @@ class ProductManager{
 //     'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
 //     );
 
-// // Se llama a get products
+// Se llama a get products
 // productManager.getProducts();
 
-// // Se agrega producto nuevo
+// Se agrega producto nuevo
 
-// productManager.addProduct('producto prueba 2','Este es un producto prueba 2',201,'Sin imagen','abc1234',251);
+productManager.addProduct('producto prueba 2','Este es un producto prueba 2',201,'Sin imagen','abc1234',251);
 // productManager.getProducts();
 
-// // Se agrega producto nuevo
-// productManager.addProduct('producto prueba 3','Este es un producto prueba 2',202,'Sin imagen','abc12345',252);
-// productManager.getProducts();
+// Se agrega producto nuevo
+productManager.addProduct('producto prueba 3','Este es un producto prueba 2',202,'Sin imagen','abc12345',252);
+productManager.getProducts();
 
 // // Se prueba el getProduct
-// productManager.getProductById(2);
-// productManager.getProductById(4);
-// productManager.getProductById(2);
-// productManager.getProductById(1);
-// productManager.getProductById(0);
-// productManager.getProductById(3);
-// productManager.getProductById(-1);
+productManager.getProductById(2);
+productManager.getProductById(4);
+productManager.getProductById(2);
+productManager.getProductById(1);
+productManager.getProductById(0);
+productManager.getProductById(3);
+productManager.getProductById(-1);
