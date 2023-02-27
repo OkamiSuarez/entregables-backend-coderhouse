@@ -102,40 +102,46 @@ class ProductManager{
         // }
         let realId = id - 1
         let updateProduct = this.products[realId]
-        console.log(this.products);
-        console.log(updateProduct);
+        // console.log(this.products);
+        // console.log('Updating product');
+        // console.log(updateProduct);
         // let objName = property.toString();
         // console.log(propertyName);
         // console.log(`property to change is ${obj}`);
-        console.log(obj);
-        console.log(`Id is ${id}`);
+        // console.log(obj);
+        // console.log(`Id is ${id}`);
         // console.log(updateProduct.property);
         // console.log(updateProduct.code);
-
-        const productUpdate = {...updateProduct, ...obj}
-        console.log(productUpdate);
-        this.products.splice(realId, 1, productUpdate)
-        // fs.promises.writeFile(this.path, JSON.stringify(products))
-        console.log(this.products);
-
-        // const products = this.requestProducts()
-        // const indexProducts = products.findIndex((u) => u.id === id)
-        // if (indexProducts === -1) {
-        //     return 'Product not found'
-        // }
-        // const productUpdate = {...products[indexProducts], ...obj}
-        // products.splice(indexProducts, 1, productUpdate)
-        // fs.promises.writeFile(this.path, JSON.stringify(products))
-
-        // // Personal
-
-        // let updateProduct = this.products[id - 1]
-        // // let objName = property.toString();
-        // // console.log(propertyName);
-        // console.log(`property to change is ${obj}`);
-        // console.log(`Value to update is ${newValue}`);
-        // // console.log(updateProduct.property);
-        // console.log(updateProduct.code);
+        if (updateProduct === undefined){
+            console.log('Product does not exist');
+        }else{
+            const productUpdate = {...updateProduct, ...obj}
+            // console.log(productUpdate);
+            this.products.splice(realId, 1, productUpdate);
+            return console.log('Updated succesfully');
+            // fs.promises.writeFile(this.path, JSON.stringify(products))
+            // console.log(this.products);
+    
+            // const products = this.requestProducts()
+            // const indexProducts = products.findIndex((u) => u.id === id)
+            // if (indexProducts === -1) {
+            //     return 'Product not found'
+            // }
+            // const productUpdate = {...products[indexProducts], ...obj}
+            // products.splice(indexProducts, 1, productUpdate)
+            // fs.promises.writeFile(this.path, JSON.stringify(products))
+    
+            // // Personal
+    
+            // let updateProduct = this.products[id - 1]
+            // // let objName = property.toString();
+            // // console.log(propertyName);
+            // console.log(`property to change is ${obj}`);
+            // console.log(`Value to update is ${newValue}`);
+            // // console.log(updateProduct.property);
+            // console.log(updateProduct.code);
+    
+        }
     }
 
 
@@ -237,5 +243,12 @@ productManager.getProductById(2);
 // productManager.updateProduct(3, );
 // productManager.deleteProduct(3);
 // productManager.requestProducts();
+productManager.getProductById(4);
 productManager.updateProduct(4,{price: 505})
+productManager.getProductById(4);
+
+productManager.getProductById(1);
+productManager.updateProduct(1,{price: 505})
+productManager.getProductById(1);
+
 // productManager.updateProduct(5,{price: 505})
