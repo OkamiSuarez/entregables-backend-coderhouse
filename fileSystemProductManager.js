@@ -68,7 +68,7 @@ class ProductManager{
     // Eliminacion de producto 
     deleteProduct(id){
         let arrayPosition = id - 1;
-        let product = this.#products[arrayPosition]
+        // let product = this.#products[arrayPosition]
         // console.log(typeof this.#products[arrayPosition]);
         // console.log(Array.isArray(product));
         // console.log(product);
