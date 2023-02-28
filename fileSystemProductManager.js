@@ -7,28 +7,21 @@ class ProductManager{
 
     // Metodo get products
     getProducts(){
-        // Si no retorno el console log al llamar la funcion
-        // No aparece nada, entonces por que no mejor declararlo asi
         let consoleProduct = console.log(this.#products)
         return consoleProduct; 
     }
 
     // Autoincremental
     #setProductId(){
-        return this.#products.length === 0
+        const id = this.#products.length === 0
         ? 1
         : this.#products[this.#products.length -1].id +1
+        return id
     }
     
     // Getter del product code
     #setProductCode(code){
-        // Donde usamos el get product que guardamos en const?
-        // Creo que aquí se genera un error por que esta escrito
-        // Como product y no como products
         const getProduct = this.#products.find((product) => product.code === code);
-        // ¿Que es throw?
-        // Como funciona el new error?
-        // ¿Por que usamos product en el if si declaramos getProduct?
         if (getProduct){
             throw new Error('assigned code');
         }
@@ -52,10 +45,55 @@ class ProductManager{
 
     //metodo para obtener el id 
     getProductById(id){
-        // Misma situacion aqui para poder devolver algo a la consola
+        // this.#products.find((product) => product.id === id)
+        // console.log(this.#products);
         let gotProducts = console.log(this.#products.find((product) => product.id === id));
         return gotProducts;
     }
+
+        // // NUEVO
+    // Actualizacion de producto
+    updateProduct(id,obj){
+        let realId = id - 1
+        let updateProduct = this.#products[realId]
+        if (updateProduct === undefined){
+            console.log('Product does not exist');
+        }else{
+            const productUpdate = {...updateProduct, ...obj}
+            this.#products.splice(realId, 1, productUpdate);
+            console.log('Updated succesfully');    
+        }
+    }
+
+    // Eliminacion de producto 
+    deleteProduct(id){
+        let arrayPosition = id - 1;
+        let product = this.#products[arrayPosition]
+        // console.log(typeof this.#products[arrayPosition]);
+        // console.log(Array.isArray(product));
+        // console.log(product);
+        // console.log(this.#products);
+        if(this.#products[arrayPosition] === undefined){
+            throw new Error(`Product with id ${id} has already been deleted!!!`);
+            // return console.log(`There's still not a product created with id ${id} !!!`);
+        }else{
+            console.log('Deleting...');
+            this.#products[arrayPosition] = undefined
+            return console.log(`Product with id ${id} has been succesfully deleted`);
+        }
+    }
+
+    // // Consultar productos
+    // requestProducts = async () => {
+    //     if (fs.existsSync(this.path)){
+    //         const infoProducts = await fs.promises.readFile(this.path, 'utf-8')
+    //         const fileProducts = JSON.parse(infoProducts)
+    //         return fileProducts
+    //     } else {
+    //         console.log('File does not exists');
+    //     }
+    // }
+
 }
 
 // Testing Area
@@ -94,10 +132,56 @@ productManager.addProduct('producto prueba 3','Este es un producto prueba 2',202
 productManager.getProducts();
 
 // // Se prueba el getProduct
-productManager.getProductById(2);
-productManager.getProductById(4);
-productManager.getProductById(2);
+// productManager.getProductById(2);
+// productManager.getProductById(4);
+// productManager.getProductById(2);
+// productManager.getProductById(1);
+// productManager.getProductById(0);
+// productManager.getProductById(3);
+// productManager.getProductById(-1);
+
+// productManager.getProductById(2);
+// productManager.deleteProduct(2);
+// productManager.getProductById(2);
+
 productManager.getProductById(1);
-productManager.getProductById(0);
-productManager.getProductById(3);
-productManager.getProductById(-1);
+productManager.getProducts();
+productManager.deleteProduct(1);
+productManager.getProducts();
+// productManager.deleteProduct(1);
+productManager.deleteProduct(3);
+productManager.getProducts();
+
+// productManager.getProductById(2);
+// productManager.deleteProduct();
+// productManager.getProductById(1);
+
+// productManager.deleteProduct(2);
+// productManager.getProductById(1);
+// productManager.getProductById(3);
+// productManager.getProductById(2);
+// productManager.getProducts();
+// productManager.deleteProduct(4);
+
+
+productManager.addProduct(
+    'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
+    );
+productManager.getProducts();
+
+productManager.updateProduct(4,{price: 505})
+productManager.getProductById(4);
+productManager.updateProduct(4,{title: 'Changed Product'})
+productManager.getProductById(4);
+
+productManager.getProducts();
+
+// productManager.deleteProduct(1);
+// productManager.getProducts();
+// productManager.deleteProduct(1);
+// productManager.getProducts();
+
+
+// productManager.getProductById(1);
+// productManager.updateProduct(1,{price: 505})
+// productManager.getProductById(1);
