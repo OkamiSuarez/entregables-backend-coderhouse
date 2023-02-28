@@ -16,6 +16,39 @@ class ProductManager{
         const id = this.#products.length === 0
         ? 1
         : this.#products[this.#products.length -1].id +1
+        // console.log(this.#products[this.#products.length -1].id +1)
+
+        // A partir de aqui hay que determinar por que se genera el nan a raiz 
+        // de que el ultimo id que exista haya sido el eliminado
+
+        // console.log(this.#products[this.#products.length -1].id +1);
+
+        // La respuesta esta arriba, lo que sucede es que en esa linea 
+        // Se esta evaluando el -1, pero si ese menos uno es undefined
+        // No se puede evaluar con certeza ese valor, por lo que esta
+        // Generando un NaN
+
+        // Hay que generar una línea de codigo que tome en cuenta la
+        // posibilidad de generar una lectura que no solo impacte en el id
+        // Que, basandose en la longitud del array solamente pueda retornar
+        // El valor que requerimos 
+
+        //--//--//--//
+        // Insertar esa linea aqui 
+        //--//--//--//
+
+        console.log(id);
+        let evaluacion = NaN
+        let evaluacionDos = this.#products[this.#products.length -1]
+        console.log(evaluacionDos);
+        console.log(evaluacionDos === {undefined:undefined});
+        console.log(id === evaluacion);
+        console.log(id === undefined);
+        if (id === NaN){
+            console.log('hay un NaN estorbando');
+        }else{
+            console.log('Hay algo diferente que tomar en cuenta');
+        }
         return id
     }
     
@@ -67,18 +100,19 @@ class ProductManager{
 
     // Eliminacion de producto 
     deleteProduct(id){
+        let deletedProduct = this.#products.find((product) => product.id === id)
         let arrayPosition = id - 1;
         // let product = this.#products[arrayPosition]
         // console.log(typeof this.#products[arrayPosition]);
         // console.log(Array.isArray(product));
         // console.log(product);
         // console.log(this.#products);
-        if(this.#products[arrayPosition] === undefined){
+        if(deletedProduct === undefined){
             throw new Error(`Product with id ${id} has already been deleted!!!`);
             // return console.log(`There's still not a product created with id ${id} !!!`);
         }else{
             console.log('Deleting...');
-            this.#products[arrayPosition] = undefined
+            this.#products[arrayPosition] = {undefined}
             return console.log(`Product with id ${id} has been succesfully deleted`);
         }
     }
@@ -145,10 +179,19 @@ productManager.getProducts();
 // productManager.getProductById(2);
 
 productManager.getProductById(1);
-productManager.getProducts();
+// productManager.getProducts();
 productManager.deleteProduct(1);
+productManager.getProductById(1);
+// productManager.deleteProduct(1);
+// productManager.deleteProduct(1);
+// productManager.deleteProduct(1);
 productManager.getProducts();
 // productManager.deleteProduct(1);
+productManager.getProductById(1);
+
+
+// CUANDO DESCOMENTO ESTA LINEA SE GENERA 
+// UN ERRROR CON EL ID 
 productManager.deleteProduct(3);
 productManager.getProducts();
 
@@ -167,6 +210,9 @@ productManager.getProducts();
 productManager.addProduct(
     'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25
     );
+    productManager.addProduct(
+        'producto prueba','Este es un producto prueba',200,'Sin imagen','abc123456',25
+        );
 productManager.getProducts();
 
 productManager.updateProduct(4,{price: 505})
