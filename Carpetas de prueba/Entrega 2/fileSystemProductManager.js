@@ -235,19 +235,14 @@ async function instance(){
     const productManager = new ProductManager('Products.json');
     // await productManager.setProduct(product1)
     // await productManager.setProduct(product2)
-    // const products = await productManager.getProducts()
-    const product5 = await productManager.getProductById(5)
-    await productManager.deleteProductById(3)
-    const product3 = await productManager.getProductById(3)
-    await productManager.deleteProductById(11)
-    await productManager.deleteProductById(8)
+    const products = await productManager.getProducts()
+    // const product = await productManager.getProductById(5)
+    // await productManager.deleteProductById(3)
+    // await productManager.deleteProductById(10)
+    // await productManager.deleteProductById(8)
     // await productManager.deleteProducts();
     await productManager.updateProduct(10,{description:'este es un cambio en el producto mediante el metodo update'})
-    const products = await productManager.getProducts()
-    console.log(product5);
-    console.log(product3);
     console.log(products);
-    
 }
 instance();
 
