@@ -38,7 +38,7 @@ class ProductManager{
     }
 
     // Autoincremental se cambia a un creador de usuario
-    setProduct = async (product) => {
+    addProduct = async (product) => {
         const products = await this.getProducts()
 
         // // esta es la correccion
@@ -91,7 +91,7 @@ class ProductManager{
     }
     
     // // Getter del product code
-    // #setProductCode(code){
+    // #addProductCode(code){
     //     const getProduct = this.#products.find((product) => product.code === code);
     //     if (getProduct){
     //         throw new Error('assigned code');
@@ -104,12 +104,12 @@ class ProductManager{
 
 //     // // Array de product
 //     // this.#products.push({
-//     //     id: this.#setProductId(),
+//     //     id: this.#addProductId(),
 //     //     title,
 //     //     description,
 //     //     price,
 //     //     thumbnail,
-//     //     code: this.#setProductCode(code),
+//     //     code: this.#addProductCode(code),
 //     //     stock
 //     // })
 //     // }
@@ -233,8 +233,8 @@ class ProductManager{
 // // Se instancia
 async function instance(){
     const productManager = new ProductManager('Products.json');
-    // await productManager.setProduct(product1)
-    // await productManager.setProduct(product2)
+    // await productManager.addProduct(product1)
+    // await productManager.addProduct(product2)
     // const products = await productManager.getProducts()
     const product5 = await productManager.getProductById(5)
     await productManager.deleteProductById(3)
