@@ -5,6 +5,15 @@ const app = express()
 
 const productManager = new ProductManager('./products.json')
 
+// Siempre por default hay que crear 2 middlewares 
+// para que se lea la información que llega al server 
+// express.json()
+// express.urlencoded()
+
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
+
 // Se crea la respuesta de products
 app.get('/products', async(req,res)=>{
     const products = await productManager.getProducts()
@@ -15,11 +24,17 @@ app.get('/products', async(req,res)=>{
 // Se crea el post de products
 app.post('/products', async(req,res)=>{
     const obj = req.body
+    console.log('information',obj);
     const newProduct = await productManager.addProduct(obj)
     res.json({message: 'Product created', product: newProduct })
 })
 
-
+// Para llamar a los id
+app.get('/products/:id',(req,res)=>{
+    console.log(req.params);
+    console.log(req.query);
+    res.send
+})
 
 
 
