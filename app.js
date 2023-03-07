@@ -7,18 +7,9 @@ const productManager = new ProductManager('./products.json')
 
 // Siempre por default hay que crear 2 middlewares 
 // para que se lea la información que llega al server 
-// express.json()
-// express.urlencoded()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
-// // Se crea la respuesta de products
-// app.get('/products', async(req,res)=>{
-//     const products = await productManager.getProducts()
-
-//     res.json({products})
-// })
 
 // Se crea el post de products
 app.post('/products', async(req,res)=>{
@@ -41,43 +32,20 @@ app.get('/products/:id', async(req,res)=>{
 // Se crea la respuesta de el endpoint
 app.get('/products',async (req,res)=>{
     const products = await productManager.getProducts()
-    // console.log(req.query);
     const {limit} = req.query
     const forLength = products.length
-    // console.log("forLength");
-    // console.log(forLength);
-    // console.log('limit');
-    // console.log(limit);
-    // console.log('limit');
-    // console.log(limitValue);
-    // console.log(products);
     if(limit>forLength){
         // Esta evaluación es para evitar que se soliciten
         // MAS productos de los que existen
         res.json({products})
     }else if (limit<=forLength){
-        // console.log('Estableciendo limite');
-        // let requestedProduct = await productManager.getProductById(+limit)
         let queryArray = []
-        // console.log(requestedProduct);
         let evaluateLimit = parseInt(limit) + 1
-        // console.log(evaluateLimit);
-        // console.log(limitValue -1);
         for(let i = 1; i < evaluateLimit; i++){
-            // console.log(i)
             let limitArray = await productManager.getProductById(i)
-
-            // let limitArray =+ [{requestedProduct}]
             console.log(limitArray);
             queryArray.push(limitArray)
             console.log(queryArray);
-
-            // console.log(requestedProduct);
-            // res.json({requestedProduct})
-            // console.log('result del limit');
-            // console.log(limitResult);
-            // return limitResult
-            // return queryArray
         }
         res.json({queryArray})
     }else{

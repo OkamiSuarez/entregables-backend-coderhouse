@@ -111,8 +111,8 @@ export default class ProductManager{
     // }
 
 // // Se instancia
-async function instance(){
-    const productManager = new ProductManager('Products.json');
+// async function instance(){
+//     const productManager = new ProductManager('Products.json');
     // await productManager.addProduct(product1)
     // await productManager.addProduct(product2)
     // const products = await productManager.getProducts()
@@ -128,86 +128,5 @@ async function instance(){
     // console.log(product3);
     // console.log(products);
     
-}
+// }
 // instance();
-
-// {
-//     "title":"Producto 2",
-//     "description": "Prueba para el producto 2",
-//     "price":250,
-//     "thumbnail":"Sin imagen",
-//     "code": "A002",
-//     "stock": 20
-//   }
-//   {
-//     "title":"Producto 3",
-//     "description": "Prueba para el producto 3",
-//     "price":200,
-//     "thumbnail":"Sin imagen",
-//     "code": "A003",
-//     "stock": 35
-//   }
-//   {
-//     "title":"Producto 4",
-//     "description": "Prueba para el producto 4",
-//     "price":200,
-//     "thumbnail":"Sin imagen",
-//     "code": "A004",
-//     "stock": 30
-//   }
-//   {
-//     "title":"Producto 5",
-//     "description": "Prueba para el producto 5",
-//     "price":400,
-//     "thumbnail":"Sin imagen",
-//     "code": "A005",
-//     "stock": 3
-//   }
-//   {
-//     "title":"Producto 6",
-//     "description": "Prueba para el producto 6",
-//     "price":20,
-//     "thumbnail":"Sin imagen",
-//     "code": "A006",
-//     "stock": 300
-//   }
-//   {
-//     "title":"Producto 7",
-//     "description": "Prueba para el producto 7",
-//     "price":2020,
-//     "thumbnail":"Sin imagen",
-//     "code": "A007",
-//     "stock": 339
-//   }
-//   {
-//     "title":"Producto 8",
-//     "description": "Prueba para el producto 8",
-//     "price":90,
-//     "thumbnail":"Sin imagen",
-//     "code": "A008",
-//     "stock": 70
-//   }
-//   {
-//     "title":"Producto 9",
-//     "description": "Prueba para el producto 9",
-//     "price":500,
-//     "thumbnail":"Sin imagen",
-//     "code": "A009",
-//     "stock": 940
-//   }
-//   {
-//     "title":"Producto 10",
-//     "description": "Prueba para el producto 10",
-//     "price":2,
-//     "thumbnail":"Sin imagen",
-//     "code": "A010",
-//     "stock": 889
-//   }
-//   {
-//     "title":"Producto 11",
-//     "description": "Prueba para el producto 11",
-//     "price":1500,
-//     "thumbnail":"Sin imagen",
-//     "code": "A011",
-//     "stock": 10
-//   }
