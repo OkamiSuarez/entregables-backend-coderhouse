@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { query } from 'express'
 import ProductManager from './ProductManager.js'
 
 const app = express()
@@ -13,13 +13,12 @@ const productManager = new ProductManager('./products.json')
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+// // Se crea la respuesta de products
+// app.get('/products', async(req,res)=>{
+//     const products = await productManager.getProducts()
 
-// Se crea la respuesta de products
-app.get('/products', async(req,res)=>{
-    const products = await productManager.getProducts()
-
-    res.json({products})
-})
+//     res.json({products})
+// })
 
 // Se crea el post de products
 app.post('/products', async(req,res)=>{
@@ -30,38 +29,42 @@ app.post('/products', async(req,res)=>{
 })
 
 // Para llamar a los id
-app.get('/products/:id',(req,res)=>{
-    console.log(req.params);
-    console.log(req.query);
-    res.send
+app.get('/products/:id', async(req,res)=>{
+    let id = req.params
+    let idSearch = id.id
+    console.log(idSearch);
+    let requestedProduct = await productManager.getProductById(+idSearch)
+    console.log(requestedProduct);
+    res.json({requestedProduct})
 })
 
-
+// Se crea la respuesta de el endpoint
+app.get('/products',async (req,res)=>{
+    const products = await productManager.getProducts()
+    // console.log(req.query);
+    const {limit} = req.query
+    console.log('limit');
+    console.log(limit);
+    console.log('limit');
+    // console.log(limitValue);
+    console.log(products);
+    if(limit){
+        console.log('Estableciendo limite');
+        // console.log(limitValue -1);
+        // for(let i = 0; i < limitValue; i++){
+        //     // console.log(products[i])
+        //     let limitedProducts = products[i]
+        //     console.log(limitedProducts);
+        //     res.json({limitedProducts})
+        // }
+        req.json({limit})
+    }else{
+        res.json({products})
+    }
+    
+})
 
 // Se escucha al puerto 8080
 app.listen(8080,()=> {
     console.log('escuchando al puerto 8080');
 })
-
-
-
-// Leer el archivo de preoductos y devolverlos
-// Dentro de un objeto 
-// recibir por query param el limit
-app.get('/productos',(req,res)=>{
-    res.send('Hola productos')
-})
-
-// recibir por req.params el product id 
-// Devolver solo el producto solicitado
-app.get('/productos/:pid',(req,res)=>{
-    res.send('Hola productos')
-})
-
-app.get('/usuarios',(req,res)=>{
-    res.send('Hola usuarios')
-})
-
-
-
-
