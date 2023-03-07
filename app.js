@@ -1,24 +1,34 @@
-const express = require('express');
+import express from 'express'
+import ProductManager from './ProductManager.js'
 
-// Se tiene que inicializar el módulo
-// Por convencion lo llamaremos app
 const app = express()
 
-// La sintaxis es el modulo, el listen y dentro
-// iria (puerto,()=>{que se hace al escucharlo})
+const productManager = new ProductManager('./products.json')
+
+// Se crea la respuesta de products
+app.get('/products', async(req,res)=>{
+    const products = await productManager.getProducts()
+
+    res.json({products})
+})
+
+// Se crea el post de products
+app.post('/products', async(req,res)=>{
+    const obj = req.body
+    const newProduct = await productManager.addProduct(obj)
+    res.json({message: 'Product created', product: newProduct })
+})
+
+
+
+
+
+// Se escucha al puerto 8080
 app.listen(8080,()=> {
     console.log('escuchando al puerto 8080');
-    console.log('determinando que esta es la ruta de activacion del localhost:8080');
 })
 
-// Como es que mando la accion de que
-// cuando se escuche haga algo 
 
-// Creamos entonces el server
-
-app.get('/',(req,res)=>{
-    res.send('Hola con express en el puerto normal')
-})
 
 // Leer el archivo de preoductos y devolverlos
 // Dentro de un objeto 

@@ -1,17 +1,17 @@
 // Se agrega fs para la información 
-const fs = require('fs')
+import fs from 'fs'
 
 const path = 'Products.json'
 
-// Clase
-class ProductManager{
-    #products
+// Clase se exporta
+export default class ProductManager{
+    // #products
     constructor(path){
-        this.#products = [];
+        // this.#products = []
         this.path = path
     }
 
-    // Metodo get products
+    // Metodo get products 
     getProducts = async() => {
         if(fs.existsSync(this.path)){
             const infoProducts = await fs.promises.readFile(this.path,'utf-8')
@@ -112,21 +112,21 @@ class ProductManager{
 
 // // Se instancia
 async function instance(){
-    const productManager = new ProductManager('Products.json');
+    // const productManager = new ProductManager('Products.json');
     // await productManager.addProduct(product1)
     // await productManager.addProduct(product2)
     // const products = await productManager.getProducts()
-    const product5 = await productManager.getProductById(5)
-    await productManager.deleteProductById(3)
-    const product3 = await productManager.getProductById(3)
-    await productManager.deleteProductById(11)
-    await productManager.deleteProductById(8)
+    // const product5 = await productManager.getProductById(5)
+    // await productManager.deleteProductById(3)
+    // const product3 = await productManager.getProductById(3)
+    // await productManager.deleteProductById(11)
+    // await productManager.deleteProductById(8)
     // await productManager.deleteProducts();
-    await productManager.updateProduct(10,{description:'este es un cambio en el producto mediante el metodo update'})
-    const products = await productManager.getProducts()
-    console.log(product5);
-    console.log(product3);
-    console.log(products);
+    // await productManager.updateProduct(10,{description:'este es un cambio en el producto mediante el metodo update'})
+    // const products = await productManager.getProducts()
+    // console.log(product5);
+    // console.log(product3);
+    // console.log(products);
     
 }
-instance();
+// instance();
