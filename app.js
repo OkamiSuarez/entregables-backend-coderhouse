@@ -21,37 +21,33 @@ app.post('/products', async(req,res)=>{
 
 // Para llamar a los id
 app.get('/products/:id', async(req,res)=>{
-    let id = req.params
-    let idSearch = id.id
-    console.log(idSearch);
-    let requestedProduct = await productManager.getProductById(+idSearch)
+    const {id} = req.params
+    console.log(id);
+    let requestedProduct = await productManager.getProductById(+id)
     console.log(requestedProduct);
     res.json({requestedProduct})
 })
 
+
 // Se crea la respuesta de el endpoint
 app.get('/products',async (req,res)=>{
-    const products = await productManager.getProducts()
-    const {limit} = req.query
-    const forLength = products.length
-    if(limit>forLength){
-        // Esta evaluación es para evitar que se soliciten
-        // MAS productos de los que existen
-        res.json({products})
-    }else if (limit<=forLength){
-        let queryArray = []
-        let evaluateLimit = parseInt(limit) + 1
-        for(let i = 1; i < evaluateLimit; i++){
-            let limitArray = await productManager.getProductById(i)
-            console.log(limitArray);
-            queryArray.push(limitArray)
-            console.log(queryArray);
+
+    try{
+        const products = await productManager.getProducts()
+        const {limit} = req.query
+        
+        if (!limit || limit === undefined || limit == '' || limit > products.length){
+            console.log('limit unable to process');
+            res.json({products})
+        }else if (limit<=products.length){
+            const newArray = products.slice(0,limit);
+            res.json(newArray)
+        }else{
+            res.json({products})
         }
-        res.json({queryArray})
-    }else{
-        res.json({products})
+    } catch (err){
+        res.json({message: err.mesage})
     }
-    
 })
 
 // Se escucha al puerto 8080
