@@ -36,14 +36,12 @@ app.get('/products',async (req,res)=>{
         const products = await productManager.getProducts()
         const {limit} = req.query
         
-        if (!limit || limit === undefined || limit == '' || limit > products.length){
+        if (!limit){
             console.log('limit unable to process');
             res.json({products})
-        }else if (limit<=products.length){
+        }else{
             const newArray = products.slice(0,limit);
             res.json(newArray)
-        }else{
-            res.json({products})
         }
     } catch (err){
         res.json({message: err.mesage})
