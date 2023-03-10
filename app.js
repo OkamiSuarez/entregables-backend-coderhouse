@@ -37,7 +37,7 @@ app.get('/products',async (req,res)=>{
         const {limit} = req.query
         
         if (!limit){
-            console.log('limit unable to process');
+            console.log('limit unable to process')
             res.json({products})
         }else{
             const newArray = products.slice(0,limit);
