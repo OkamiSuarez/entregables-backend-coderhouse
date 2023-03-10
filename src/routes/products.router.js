@@ -1,18 +1,9 @@
-import express, { query } from 'express'
-import ProductManager from './ProductManager.js'
+import { Router } from "express";
 
-const app = express()
-
-const productManager = new ProductManager('./products.json')
-
-// Siempre por default hay que crear 2 middlewares 
-// para que se lea la información que llega al server 
-
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+const router = Router()
 
 // Se crea el post de products
-app.post('/products', async(req,res)=>{
+router.post('/', async(req,res)=>{
     const obj = req.body
     console.log('information',obj);
     const newProduct = await productManager.addProduct(obj)
@@ -20,7 +11,7 @@ app.post('/products', async(req,res)=>{
 })
 
 // Para llamar a los id
-app.get('/products/:id', async(req,res)=>{
+router.get('/:id', async(req,res)=>{
     const {id} = req.params
     console.log(id);
     let requestedProduct = await productManager.getProductById(+id)
@@ -30,14 +21,14 @@ app.get('/products/:id', async(req,res)=>{
 
 
 // Se crea la respuesta de el endpoint
-app.get('/products',async (req,res)=>{
+router.get('/',async (req,res)=>{
 
     try{
         const products = await productManager.getProducts()
         const {limit} = req.query
         
         if (!limit){
-            console.log('limit unable to process')
+            console.log('limit unable to process');
             res.json({products})
         }else{
             const newArray = products.slice(0,limit);
@@ -48,7 +39,4 @@ app.get('/products',async (req,res)=>{
     }
 })
 
-// Se escucha al puerto 8080
-app.listen(8080,()=> {
-    console.log('escuchando al puerto 8080');
-})
+export default router
