@@ -2,6 +2,16 @@ import { Router } from "express";
 
 const router = Router()
 
+// middleware de seguridad
+const validarUsuario = (req, res, next) =>{
+    const user = req.body
+    if(user.firstname === 'Esteban'){
+        res.send('No admin grants')
+    } else{
+        next()
+    }
+}
+
 // Se crea el post de products
 router.post('/', async(req,res)=>{
     const obj = req.body

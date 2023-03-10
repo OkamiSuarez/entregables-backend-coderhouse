@@ -2,6 +2,12 @@ import express, { query } from 'express'
 import ProductManager from '../ProductManager.js'
 import productsRouter from './routes/products.router'
 import cartRouter from './routes/cart.router'
+import { __dirname } from './utils.js'
+
+// importar dirname por que usamos module
+console.log('Aqui abajo estan las líneas del dirname');
+console.log(__dirname);
+console.log("__dirname",__dirname+'/public');
 
 const app = express()
 
@@ -9,9 +15,11 @@ const app = express()
 const productManager = new ProductManager('./products.json')
 
 // middlewares
-
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
+// public
+app.use('/static',express.static(__dirname+'/public'))
 
 // routes
 app.use('/api/products',productsRouter) //products
